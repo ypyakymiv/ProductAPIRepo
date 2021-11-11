@@ -47,6 +47,10 @@ namespace ProductsAPI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}/{action}/{id?}",
+                    defaults: new { controller="Products", action="GetAllProducts"});
             });
         }
     }

@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "4dc1ac95-f2ef-44eb-8f94-9cfb1d3fc160",
+		"name": "productsapp-automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"let reqProperties = [\"id\", \"name\", \"category\", \"price\"];",
+							"",
+							"let items = [",
+							"    {id: 1, name: \"Tomato Soup\", category: \"Groceries\", price: 1},",
+							"    {id: 2, name: \"Yo-Yo\", category: \"Toys\", price: 3.75},",
+							"    {id: 3, name: \"Hammer\", category: \"Hardware\", price: 16.99M}",
+							"];",
+							"",
+							"pm.test(\"response to be 200 OK\", function(){ ",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response time less than 1000MS\", function(){ ",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"for(var i = 0; i < jsonData.length; i++) {",
+							"    for(var j = 0; j < reqProperties.length; j++) {",
+							"        pm.test(`response object to have all required properties`, function(){ ",
+							"            pm.expect(jsonData[i]).to.have.all.keys(reqProperties);",
+							"        });",
+							"",
+							"        pm.test(`value of [${i}].${reqProperties[j]} to be ${items[i]}`, function(){ ",
+							"            pm.expect(jsonData[i][reqProperties[j]]).to.equal(items[i][reqProperties[j]])",
+							"        });",
+							"    }",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Products/GetAllProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Products",
+						"GetAllProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"let reqProperties = [\"id\", \"name\", \"category\", \"price\"];",
+							"",
+							"let item = {id: 1, name: \"Tomato Soup\", category: \"Groceries\", price: 1};",
+							"",
+							"pm.test(\"response to be 200 OK\", function(){ ",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response time less than 1000MS\", function(){ ",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"for(var j = 0; j < reqProperties.length; j++) {",
+							"    pm.test(`response object to have all required properties`, function(){ ",
+							"        pm.expect(jsonData).to.have.all.keys(reqProperties);",
+							"    });",
+							"",
+							"    pm.test(`value of .${reqProperties[j]} to be ${item}`, function(){ ",
+							"        pm.expect(jsonData[reqProperties[j]]).to.equal(item[reqProperties[j]])",
+							"    });",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/Products/GetProduct/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Products",
+						"GetProduct",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
