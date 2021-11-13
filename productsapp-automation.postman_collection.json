@@ -13,13 +13,12 @@
 					"script": {
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"",
 							"let reqProperties = [\"id\", \"name\", \"category\", \"price\"];",
 							"",
 							"let items = [",
 							"    {id: 1, name: \"Tomato Soup\", category: \"Groceries\", price: 1},",
-							"    {id: 2, name: \"Yo-Yo\", category: \"Toys\", price: 3.75},",
-							"    {id: 3, name: \"Hammer\", category: \"Hardware\", price: 16.99M}",
+							"    {id: 2, name: \"Yo-yo\", category: \"Toys\", price: 3.75},",
+							"    {id: 3, name: \"Hammer\", category: \"Hardware\", price: 16.99}",
 							"];",
 							"",
 							"pm.test(\"response to be 200 OK\", function(){ ",
@@ -52,13 +51,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/Products/GetAllProducts",
+					"raw": "http://localhost:5000/api/Products/GetAllProducts",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
 						"Products",
 						"GetAllProducts"
 					]
